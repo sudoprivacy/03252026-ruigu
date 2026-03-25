@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>锐锢 AI 智能体平台方案</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
 
@@ -326,19 +329,88 @@
     background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     font-weight: 800;
   }
+
+  /* ===== Agent Spec Cards ===== */
+  .spec-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem; transition: all 0.3s;
+  }
+  .spec-card:hover { border-color: var(--border-accent); }
+  .spec-card .spec-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem;
+  }
+  .spec-card .spec-header h4 { color: var(--text-bright); font-size: 0.95rem; }
+  .spec-card .spec-header .spec-icon {
+    width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .spec-type-badge {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; font-weight: 600; display: inline-block; margin-right: 4px;
+  }
+  .spec-type-a { background: rgba(16,185,129,0.15); color: #34d399; }
+  .spec-type-b { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .spec-type-c { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .spec-type-mix { background: rgba(6,182,212,0.15); color: #67e8f9; }
+
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.6rem; }
+  .spec-block { background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; }
+  .spec-block-title {
+    font-size: 0.7rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 0.4rem;
+  }
+  .spec-block .spec-item {
+    font-size: 0.75rem; color: var(--text); line-height: 1.6; display: flex; align-items: baseline; gap: 4px;
+  }
+  .spec-block .spec-item .si-icon { flex-shrink: 0; font-size: 0.65rem; }
+  .spec-deliver { margin-top: 0.6rem; }
+  .spec-deliver-row {
+    display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text); line-height: 1.8;
+  }
+  .spec-eval-row {
+    display: flex; align-items: baseline; gap: 6px; font-size: 0.75rem; line-height: 1.7;
+  }
+  .spec-eval-label { color: var(--text-dim); min-width: 100px; }
+  .spec-eval-val { color: var(--accent4); font-weight: 600; }
+  .spec-eval-red { color: var(--accent5); font-weight: 600; }
+
+  .spec-readiness { margin-top: 0.6rem; }
+  .spec-readiness-row {
+    display: flex; align-items: baseline; gap: 6px; font-size: 0.75rem; line-height: 1.7;
+  }
+
+  .client-action-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .client-action-table th {
+    background: rgba(99,102,241,0.1); color: var(--text-bright); font-weight: 600;
+    padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .client-action-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text); }
+  .urgency-p0 { color: var(--accent5); font-weight: 700; }
+  .urgency-p1 { color: var(--accent3); font-weight: 700; }
+  .urgency-p2 { color: var(--accent4); font-weight: 700; }
+
+  .spec-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .spec-tab {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; cursor: pointer;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-dim); transition: all 0.2s; font-weight: 500;
+  }
+  .spec-tab:hover { border-color: rgba(99,102,241,0.3); color: var(--text); }
+  .spec-tab.active { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: var(--text-bright); }
+  .spec-panel { display: none; }
+  .spec-panel.active { display: block; }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <div class="logo"><span>Nexus OS</span> &times; 锐锢</div>
+    <div class="logo">锐锢 &times; <span>数牍</span></div>
     <div class="nav-links">
       <a href="#" data-section="hero" class="active">首页</a>
       <a href="#" data-section="pain">痛点</a>
       <a href="#" data-section="products">产品</a>
       <a href="#" data-section="arch">架构</a>
       <a href="#" data-section="positions">9 岗位</a>
+      <a href="#" data-section="specs">Agent 规格</a>
       <a href="#" data-section="timeline">路线图</a>
       <a href="#" data-section="roi">ROI</a>
       <a href="#" data-section="meeting">会议议程</a>
@@ -349,8 +421,8 @@
 <!-- ===== HERO ===== -->
 <div class="section active" id="hero">
   <div class="hero">
-    <h1>不做 9 个机器人<br>建一个 <em>AI 员工工厂</em></h1>
-    <p class="subtitle">基于 Nexus OS 智能体操作系统，为锐锢部署 9 个 AI 职场搭子。<br>工厂建好后，每多一个 AI 员工，成本更低、速度更快。</p>
+    <h1>不做 9 个机器人<br>建一条 <em>硅基员工产线</em></h1>
+    <p class="subtitle">基于 Nexus OS 智能体操作系统，为锐锢部署 9 个 AI 职场搭子。<br>产线建好后，每多一个硅基员工，成本更低、速度更快。</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">9</div><div class="label">AI 职场搭子</div></div>
       <div class="hero-stat"><div class="num">8</div><div class="label">系统对接</div></div>
@@ -781,6 +853,551 @@
   </div>
 </div>
 
+<!-- ===== AGENT SPECS ===== -->
+<div class="section" id="specs">
+  <div class="section-inner">
+    <div class="sh">
+      <div class="eyebrow">实现规格</div>
+      <h2>每个 Agent 怎么建</h2>
+      <p>资料就绪度、Extension/Skill 依赖、交付物、Eval 指标 — 一览全局</p>
+    </div>
+
+    <!-- Tab navigation -->
+    <div class="spec-tabs">
+      <div class="spec-tab active" onclick="switchSpecTab('overview')">依赖矩阵</div>
+      <div class="spec-tab" onclick="switchSpecTab('p0')">P0 三剑客</div>
+      <div class="spec-tab" onclick="switchSpecTab('p1')">P1 三岗位</div>
+      <div class="spec-tab" onclick="switchSpecTab('p2')">P2 三岗位</div>
+      <div class="spec-tab" onclick="switchSpecTab('actions')">客户待确认</div>
+    </div>
+
+    <!-- ===== Overview Tab ===== -->
+    <div class="spec-panel active" id="spec-overview">
+      <div class="card" style="overflow-x:auto;">
+        <h3 style="color:var(--text-bright);font-size:1rem;margin-bottom:1rem;">9 Agent 依赖矩阵</h3>
+        <table class="comp-table" style="font-size:0.75rem;min-width:900px;">
+          <thead>
+            <tr>
+              <th>Agent</th>
+              <th style="color:var(--accent2);">wecom</th>
+              <th style="color:var(--accent2);">ruigou</th>
+              <th style="color:var(--accent2);">cs</th>
+              <th style="color:var(--accent2);">lingxing</th>
+              <th style="color:var(--accent2);">mp</th>
+              <th style="color:var(--accent2);">zentao</th>
+              <th style="color:var(--accent2);">jenkins</th>
+              <th style="color:var(--accent2);">shangshangqian</th>
+              <th style="color:var(--accent3);">rule-engine</th>
+              <th style="color:var(--accent3);">report</th>
+              <th style="color:var(--accent3);">human-loop</th>
+              <th style="color:var(--accent3);">rag-qa</th>
+              <th style="color:var(--accent3);">audit-log</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="color:var(--text-bright);">① 智引助手</td><td>●</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">② 返厂管理</td><td>●</td><td></td><td>●</td><td></td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td></td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">③ 亚马逊核对</td><td>●</td><td></td><td></td><td>●</td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td>●</td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">④ 入驻管家</td><td>●</td><td>●</td><td></td><td></td><td></td><td></td><td></td><td>●</td><td></td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">⑤ SQL 审计</td><td></td><td>●</td><td></td><td></td><td></td><td>●</td><td></td><td></td><td>●</td><td>●</td><td></td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">⑥ 商品运维</td><td>●</td><td>●</td><td></td><td></td><td>●</td><td></td><td></td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">⑦ 采购追货</td><td>●</td><td>●</td><td></td><td></td><td>●</td><td></td><td></td><td></td><td>●</td><td>●</td><td>●</td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">⑧ 微信质检</td><td>●</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td></td><td></td><td>●</td></tr>
+            <tr><td style="color:var(--text-bright);">⑨ 系统发布</td><td>●</td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td></td><td>●</td><td>●</td><td></td><td></td><td>●</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:0.75rem;">
+          <span style="color:var(--accent2);">蓝色列</span> = Extension/Plugin（系统对接层）&nbsp;&nbsp;
+          <span style="color:var(--accent3);">橙色列</span> = Horizontal Skill（通用能力层）&nbsp;&nbsp;
+          + 每个 Agent 还有 1 个 <strong style="color:var(--text-bright);">Domain Expert Skill</strong>（岗位专属知识包）
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== P0 Tab ===== -->
+    <div class="spec-panel" id="spec-p0">
+      <div style="margin-bottom:0.75rem;"><span class="tag tag-green">P0 — 资料最齐，最先落地</span></div>
+      <div class="card-grid cols-3">
+
+        <!-- 智引助手 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(99,102,241,0.15);">💬</div>
+            <div>
+              <h4>① 智引助手</h4>
+              <div><span class="spec-type-badge spec-type-c">Type C 实时对话</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：商家企微群消息 → 实时响应 · 模型 L1 80% / L2 15% / L3 5%</div>
+
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（群消息收发）</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">📦</span> rag-qa（向量检索）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">smart-guide-kb</strong></div>
+              <div class="spec-item"><span class="si-icon">👤</span> human-loop · audit-logger</div>
+            </div>
+          </div>
+
+          <div class="spec-block" style="margin-top:0.6rem;">
+            <div class="spec-block-title">Domain Skill: smart-guide-kb</div>
+            <div class="spec-item" style="font-family:monospace;font-size:0.7rem;white-space:pre;line-height:1.5;">knowledge/ → 4份文档结构化
+rules/ → 硬规则+升级规则
+embeddings/ → 向量化知识库
+eval/ → 100道标注Q&A</div>
+          </div>
+
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📨 企微群即时回复（实时）</div>
+            <div class="spec-deliver-row">📊 每日未匹配问题汇总 → 牛凌</div>
+            <div class="spec-deliver-row">📈 知识库覆盖率报告（每周）</div>
+          </div>
+
+          <div style="margin-top:0.6rem;">
+            <div class="spec-block-title">Eval 指标</div>
+            <div class="spec-eval-row"><span class="spec-eval-label">回答准确率</span><span class="spec-eval-val">≥ 90%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">幻觉率</span><span class="spec-eval-val">≤ 3%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">资金转人工</span><span class="spec-eval-red">= 100% ⛔</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">响应 P95</span><span class="spec-eval-val">≤ 3s</span></div>
+          </div>
+
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 4 份文档全部到位</div>
+            <div class="spec-readiness-row" style="color:var(--accent4);font-weight:600;">⭐ P0 中最易启动</div>
+          </div>
+        </div>
+
+        <!-- 返厂管理 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(16,185,129,0.15);">📦</div>
+            <div>
+              <h4>② 返厂管理搭子</h4>
+              <div><span class="spec-type-badge spec-type-a">Type A 定时批处理</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每日 09:00 定时 · 模型 L1 95% / L2 5%</div>
+
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> cs-ext（返厂单据查询）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（推送+审批）</div>
+              <div class="spec-item"><span class="si-icon">📎</span> excel-plugin · scheduler</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine（品类+超时+异常）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">return-judgment</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · audit-logger</div>
+            </div>
+          </div>
+
+          <div class="spec-block" style="margin-top:0.6rem;">
+            <div class="spec-block-title">Domain Skill: return-judgment</div>
+            <div class="spec-item" style="font-family:monospace;font-size:0.7rem;white-space:pre;line-height:1.5;">rules/ → 品类映射+超时分级+物流异常+误报防控
+templates/ → 44字段报表模板
+responsibility_matrix.yaml → AI 8项/人工 7项
+eval/ → 100条标注历史单据</div>
+          </div>
+
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📊 每日 44 字段 Excel 报表 → 汤雯</div>
+            <div class="spec-deliver-row">📨 待审批单据通知（企微审批流）</div>
+            <div class="spec-deliver-row">🚨 物流异常告警（实时）</div>
+          </div>
+
+          <div style="margin-top:0.6rem;">
+            <div class="spec-block-title">Eval 指标</div>
+            <div class="spec-eval-row"><span class="spec-eval-label">判定准确率</span><span class="spec-eval-val">≥ 98%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">误报率(FP)</span><span class="spec-eval-red">≤ 1% ⛔</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">超时标记</span><span class="spec-eval-val">100%（纯规则）</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">报表完整性</span><span class="spec-eval-val">100%</span></div>
+          </div>
+
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 流程文档+报表字段+流程图</div>
+            <div class="spec-readiness-row">⚠️ 品类映射完整表需确认</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ CS 系统 API 需获取</div>
+          </div>
+        </div>
+
+        <!-- 亚马逊核对 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(245,158,11,0.15);">🔄</div>
+            <div>
+              <h4>③ 亚马逊处理专员</h4>
+              <div><span class="spec-type-badge spec-type-b">Type B 人机迭代</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每月 1 号 09:00 + 手动 · 模型 L1 30% / L2 60% / L3 10%</div>
+
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> lingxing-ext（6表导出）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（差异确认）</div>
+              <div class="spec-item"><span class="si-icon">📎</span> excel-plugin · scheduler</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine（唯一码+汇率+科目）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">amazon-reconciliation</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · human-loop</div>
+            </div>
+          </div>
+
+          <div class="spec-block" style="margin-top:0.6rem;">
+            <div class="spec-block-title">Domain Skill: amazon-reconciliation</div>
+            <div class="spec-item" style="font-family:monospace;font-size:0.7rem;white-space:pre;line-height:1.5;">schema/ → 6表关系+唯一码+字段映射
+reference_data/ → 汇率11行+科目154行+单价706行
+formulas/ → 币种转换+科目查找+成本计算
+reconciliation/ → 跨月核对+差异判定</div>
+          </div>
+
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📊 加工后核对表（6 Sheet）→ 专员</div>
+            <div class="spec-deliver-row">📋 差异标注报告（Excel+企微）</div>
+            <div class="spec-deliver-row">📑 月度最终核对报告 → 专员+财务</div>
+          </div>
+
+          <div style="margin-top:0.6rem;">
+            <div class="spec-block-title">Eval 指标</div>
+            <div class="spec-eval-row"><span class="spec-eval-label">6表完整性</span><span class="spec-eval-red">100% ⛔</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">科目映射准确率</span><span class="spec-eval-red">100% ⛔</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">差异检出率</span><span class="spec-eval-val">≥ 99%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">平均收敛轮数</span><span class="spec-eval-val">≤ 3 轮</span></div>
+          </div>
+
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 6表样本+汇率+科目+单价</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ J列 #REF! 修正逻辑</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ Q/P列修正规则 · 领星API能力</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== P1 Tab ===== -->
+    <div class="spec-panel" id="spec-p1">
+      <div style="margin-bottom:0.75rem;"><span class="tag tag-cyan">P1 — 条件成熟即推进</span></div>
+      <div class="card-grid cols-3">
+
+        <!-- 入驻管家 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(6,182,212,0.15);">🏠</div>
+            <div>
+              <h4>④ AI 入驻管家</h4>
+              <div><span class="spec-type-badge spec-type-c">Type C 对话</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：审批节点变更 Hook + 人工咨询 · L1 60% / L2 35% / L3 5%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（审批提醒+咨询）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> ruigou-ext（入驻状态）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> shangshangqian-ext（合同）</div>
+              <div class="spec-item"><span class="si-icon">📎</span> ocr-plugin（营业执照）</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">📦</span> rag-qa · human-loop</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">merchant-onboarding</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · audit-logger</div>
+            </div>
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📨 审批流节点提醒（实时）</div>
+            <div class="spec-deliver-row">🔧 报错诊断+解决方案（实时）</div>
+            <div class="spec-deliver-row">🚨 营业执照异常告警 @技术</div>
+          </div>
+          <div style="margin-top:0.6rem;">
+            <div class="spec-block-title">Eval</div>
+            <div class="spec-eval-row"><span class="spec-eval-label">FAQ准确率</span><span class="spec-eval-val">≥ 85%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">证照检出</span><span class="spec-eval-val">≥ 99%</span></div>
+            <div class="spec-eval-row"><span class="spec-eval-label">银行卡校验</span><span class="spec-eval-val">100%</span></div>
+          </div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 8步流程 + 4类报错Q&A + 银行卡校验</div>
+            <div class="spec-readiness-row">⚠️ 报错映射表需补充更多场景</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 入驻宝/中台 API</div>
+          </div>
+        </div>
+
+        <!-- SQL审计 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(6,182,212,0.15);">🔒</div>
+            <div>
+              <h4>⑤ SQL 合规审计</h4>
+              <div><span class="spec-type-badge spec-type-a">Type A 批处理</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每周定时（目标每日）· L1 95% / L2 5%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> ruigou-ext（告警平台）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> zentao-ext（Bug/需求）</div>
+              <div class="spec-item"><span class="si-icon">⚠️</span> sql-audit-ext（需新建）</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine（合规匹配）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">sql-compliance</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · audit-logger</div>
+            </div>
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📊 SQL合规审计报告 → 潘卓平</div>
+            <div class="spec-deliver-row">🚨 违规/未闭环清单（标红）</div>
+            <div class="spec-deliver-row">💡 历史沉淀→优化建议（每月）</div>
+          </div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 合规规则集完全缺失</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 告警平台+SQL-Audit API</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 禅道字段定义 · 历史报告样本</div>
+            <div class="spec-readiness-row" style="color:var(--accent3);">→ 需向潘卓平补充采集</div>
+          </div>
+        </div>
+
+        <!-- 商品运维 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(6,182,212,0.15);">🏷️</div>
+            <div>
+              <h4>⑥ 商品运维</h4>
+              <div><span class="spec-type-badge spec-type-mix">Type A+B 混合</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每日定时 + 人工 · L1 50% / L2 50%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> ruigou-ext · mp-ext</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> shangshangqian-ext（合同）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext · excel-plugin</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine（8组合+异常检测）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">product-ops</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report · human-loop · audit</div>
+            </div>
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📊 批次采购筛选表+加权均价</div>
+            <div class="spec-deliver-row">🚨 异常告警（有库存未上线/无图/无规格）</div>
+            <div class="spec-deliver-row">📨 调价触发通知（含类型+建议）</div>
+          </div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 新品建档+调价流程+提报表</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 加权均价公式 · 上上签API · MP API</div>
+            <div class="spec-readiness-row">⚠️ 8种调价组合仅部分到位</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== P2 Tab ===== -->
+    <div class="spec-panel" id="spec-p2">
+      <div style="margin-bottom:0.75rem;"><span class="tag tag-amber">P2 — 需求需补充</span></div>
+      <div class="card-grid cols-3">
+
+        <!-- 采购追货 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(245,158,11,0.15);">📞</div>
+            <div>
+              <h4>⑦ 采购追货</h4>
+              <div><span class="spec-type-badge spec-type-b">Type B 人机迭代</span><span class="spec-type-badge" style="background:rgba(239,68,68,0.15);color:#f87171;">最复杂</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每日定时+事件 · L1 30% / L2 40% / L3 30%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> ruigou-ext · mp-ext</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（工厂群双向）</div>
+              <div class="spec-item"><span class="si-icon">📎</span> excel-plugin · scheduler</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine · report-builder</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">procurement-tracking</strong></div>
+              <div class="spec-item"><span class="si-icon">👤</span> human-loop · audit-logger</div>
+            </div>
+          </div>
+          <div class="highlight-box" style="margin:0.6rem 0;padding:0.6rem 0.75rem;font-size:0.75rem;">
+            <strong>分两步落地：</strong><br>
+            Step 1: 日报+代办通知（纯批处理，先做）<br>
+            Step 2: 工厂追货对话+答非所问检测（后做）
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📊 每日追货异常日报（Step 1）</div>
+            <div class="spec-deliver-row">📨 代办事项通知（Step 1）</div>
+            <div class="spec-deliver-row">💬 工厂追货对话（Step 2）</div>
+            <div class="spec-deliver-row">🚨 答非所问/超时升级（Step 2）</div>
+          </div>
+          <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--accent5);font-weight:600;">⛔ 采购价格相关由人决策</div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 采购流程+提报表+流程图</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 中台代办API · 工厂联系方式</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 追货话术 · 答非所问标准</div>
+          </div>
+        </div>
+
+        <!-- 微信质检 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(245,158,11,0.15);">🔍</div>
+            <div>
+              <h4>⑧ 微信质检</h4>
+              <div><span class="spec-type-badge spec-type-mix">Type A+实时混合</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：白天15-30min轮扫 + 夜间定时 · L1 30% / L2 40% / L3 30%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext（会话存档）</div>
+              <div class="spec-item"><span class="si-icon">📎</span> scheduler-plugin</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine（超时+关键词+去重）</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">wechat-qc</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · audit-logger</div>
+            </div>
+          </div>
+          <div class="spec-block" style="margin-top:0.6rem;">
+            <div class="spec-block-title">Domain Skill: wechat-qc</div>
+            <div class="spec-item" style="font-family:monospace;font-size:0.7rem;white-space:pre;line-height:1.5;">rules/ → 超时+6种异常+60+关键词+去重
+classifiers/ → 角色识别+漏回复判定
+report_templates/ → 3张标准报表
+formulas/ → 月活+静默+工作率+升级率</div>
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">🚨 实时超时/违规告警 @管理</div>
+            <div class="spec-deliver-row">📊 表一：客服时效&问题表</div>
+            <div class="spec-deliver-row">📊 表二：群体验绩表</div>
+            <div class="spec-deliver-row">📊 表三：工作量&效率表</div>
+          </div>
+          <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--accent2);">策略：先 100 群试点 → 全量 25,000-30,000 群</div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row">✅ 完整 4阶段21步骤 + 3报表 + 60+关键词</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);font-weight:600;">❌ 企微会话存档权限（关键卡点）</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ 客户/客服信息库</div>
+          </div>
+        </div>
+
+        <!-- 系统发布 -->
+        <div class="spec-card">
+          <div class="spec-header">
+            <div class="spec-icon" style="background:rgba(245,158,11,0.15);">🚀</div>
+            <div>
+              <h4>⑨ 系统发布检查</h4>
+              <div><span class="spec-type-badge spec-type-a">Type A 批处理</span></div>
+            </div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.5rem;">触发：每周发布前后 · L1 95% / L2 5%</div>
+          <div class="spec-grid">
+            <div class="spec-block">
+              <div class="spec-block-title">Extension / Plugin</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> jenkins-ext（构建/发布）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> zentao-ext（需求/Bug）</div>
+              <div class="spec-item"><span class="si-icon">🔌</span> wecom-ext · scheduler</div>
+            </div>
+            <div class="spec-block">
+              <div class="spec-block-title">Skill 依赖</div>
+              <div class="spec-item"><span class="si-icon">⚙️</span> rule-engine</div>
+              <div class="spec-item"><span class="si-icon">🧠</span> <strong style="color:var(--accent2);">release-check</strong></div>
+              <div class="spec-item"><span class="si-icon">📊</span> report-builder · audit-logger</div>
+            </div>
+          </div>
+          <div class="spec-deliver">
+            <div class="spec-block-title">交付物</div>
+            <div class="spec-deliver-row">📋 发布前检查清单（每周）</div>
+            <div class="spec-deliver-row">📊 发布后验证报告 → 产技</div>
+          </div>
+          <div class="spec-readiness">
+            <div class="spec-block-title">资料就绪度</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);font-weight:600;">❌ SOP 完全缺失</div>
+            <div class="spec-readiness-row" style="color:var(--accent5);">❌ Jenkins/禅道 API</div>
+            <div class="spec-readiness-row" style="color:var(--accent3);">→ 需求信息最不足，需完全重新采集</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Actions Tab ===== -->
+    <div class="spec-panel" id="spec-actions">
+      <div class="card" style="margin-bottom:1.5rem;">
+        <h3 style="color:var(--text-bright);font-size:1rem;margin-bottom:1rem;">客户待确认事项（按紧急度）</h3>
+        <table class="client-action-table">
+          <thead><tr><th>优先级</th><th>事项</th><th>涉及 Agent</th><th>阻塞程度</th></tr></thead>
+          <tbody>
+            <tr><td class="urgency-p0">P0</td><td>领星 6 张表能否 API 批量导出</td><td>③ 亚马逊</td><td>决定 lingxing-ext 实现方式</td></tr>
+            <tr><td class="urgency-p0">P0</td><td>CS 系统 API（返厂单据查询）</td><td>② 返厂</td><td>决定 cs-ext 实现方式</td></tr>
+            <tr><td class="urgency-p0">P0</td><td>加工后表 J列 #REF! 修正逻辑</td><td>③ 亚马逊</td><td>影响核对准确性</td></tr>
+            <tr><td class="urgency-p0">P0</td><td>Q列 vs P列修正规则</td><td>③ 亚马逊</td><td>影响核对准确性</td></tr>
+            <tr><td class="urgency-p1">P1</td><td>企微会话存档权限开通</td><td>⑧ 微信质检</td><td style="color:var(--accent5);">完全阻塞</td></tr>
+            <tr><td class="urgency-p1">P1</td><td>中台 / MP 系统 API</td><td>⑥⑦</td><td>阻塞 P1/P2</td></tr>
+            <tr><td class="urgency-p1">P1</td><td>品类映射完整表</td><td>② 返厂</td><td>影响判定准确率</td></tr>
+            <tr><td class="urgency-p1">P1</td><td>加权均价公式 + 8种调价完整规则</td><td>⑥ 商品运维</td><td>影响计算和规则引擎</td></tr>
+            <tr><td class="urgency-p2">P2</td><td>SQL 审计合规规则集 + 告警平台 API</td><td>⑤ SQL 审计</td><td style="color:var(--accent5);">阻塞该 Agent</td></tr>
+            <tr><td class="urgency-p2">P2</td><td>发布检查 SOP（完全缺失）</td><td>⑨ 系统发布</td><td style="color:var(--accent5);">完全阻塞</td></tr>
+            <tr><td class="urgency-p2">P2</td><td>追货话术 + "答非所问"标准</td><td>⑦ 采购</td><td>阻塞 Step 2</td></tr>
+            <tr><td class="urgency-p2">P2</td><td>入驻审批流各节点完整人员</td><td>④ 入驻</td><td>影响通知准确性</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3 style="color:var(--text-bright);font-size:1rem;margin-bottom:1rem;">按系统 API 排序</h3>
+        <table class="client-action-table">
+          <thead><tr><th>系统</th><th>提供方</th><th>影响 Agent</th><th>需要的能力</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--text-bright);font-weight:600;">企业微信</td><td>锐锢 IT</td><td>8/9 个</td><td>消息收发、审批流、聊天记录、会话存档</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">锐锢中台</td><td>锐锢 IT</td><td>①④⑤⑥⑦</td><td>订单/库存/商品/代办事项</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">CS 系统</td><td>锐锢 IT</td><td>②⑤</td><td>返厂单据查询、售后记录</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">MP 系统</td><td>锐锢 IT</td><td>⑥⑦</td><td>商品信息、价格数据、供应商数据</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">领星财务</td><td>第三方</td><td>③</td><td>6 张表导出（API 或手动）</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">禅道</td><td>锐锢 IT</td><td>⑤⑨</td><td>Bug/需求查询</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">Jenkins</td><td>锐锢 IT</td><td>⑨</td><td>构建状态、发布记录</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">上上签</td><td>第三方</td><td>④⑥</td><td>合同状态</td></tr>
+            <tr><td style="color:var(--text-bright);font-weight:600;">SQL-Audit</td><td>锐锢 IT</td><td>⑤</td><td>提交记录查询</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ===== TIMELINE ===== -->
 <div class="section" id="timeline">
   <div class="section-inner">
@@ -1029,8 +1646,16 @@
     });
   });
 
+  // Spec tab switching
+  function switchSpecTab(tabId) {
+    document.querySelectorAll('.spec-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.spec-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('spec-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+
   // Keyboard navigation
-  const sections = ['hero','pain','products','arch','positions','timeline','roi','meeting'];
+  const sections = ['hero','pain','products','arch','positions','specs','timeline','roi','meeting'];
   document.addEventListener('keydown', e => {
     const cur = sections.findIndex(s => document.getElementById(s).classList.contains('active'));
     let next = cur;
