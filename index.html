@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>锐锢 AI 智能体平台方案</title>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-<link rel="apple-touch-icon" href="favicon.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
 
@@ -401,20 +398,6 @@
 </head>
 <body>
 
-<div id="passcode-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0f;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Inter','Noto Sans SC',sans-serif;">
-  <div style="text-align:center;padding:2rem;">
-    <div style="font-size:1.5rem;color:#e4e4ef;margin-bottom:1.5rem;">请输入访问码</div>
-    <input id="passcode-input" type="password" placeholder="访问码" autofocus
-      style="padding:0.75rem 1.25rem;font-size:1rem;border-radius:8px;border:1px solid #2d2d44;background:#12121a;color:#e4e4ef;outline:none;width:240px;text-align:center;"
-      onkeydown="if(event.key==='Enter')document.getElementById('passcode-btn').click()">
-    <br>
-    <button id="passcode-btn" onclick="if(document.getElementById('passcode-input').value==='ruigushudu'){document.getElementById('passcode-overlay').remove();sessionStorage.setItem('authed','1')}else{document.getElementById('passcode-err').style.display='block'}"
-      style="margin-top:1rem;padding:0.6rem 2rem;font-size:1rem;border-radius:8px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;cursor:pointer;">确认</button>
-    <div id="passcode-err" style="display:none;color:#ef4444;margin-top:0.75rem;font-size:0.9rem;">访问码错误</div>
-  </div>
-</div>
-<script>if(sessionStorage.getItem('authed')==='1'){document.getElementById('passcode-overlay').remove()}</script>
-
 <nav>
   <div class="nav-inner">
     <div class="logo">锐锢 &times; <span>数牍</span></div>
@@ -672,6 +655,10 @@
       <div class="arch-layer layer-eval">
         <h3>📊 Eval 基础设施 — 贯穿三层的质量保障</h3>
         <p>Plugin Eval → Skill Eval → Agent Eval，从开发到上线全链路监控</p>
+      </div>
+      <div class="arch-layer" style="background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(245,158,11,0.08));border:1px solid rgba(239,68,68,0.2);">
+        <h3>🧬 LoRA 微调引擎 — 数据飞轮，越用越强</h3>
+        <p>Eval 持续积累标注数据 → 达到 1,000+ 数据点 → 微调专属模型 → <strong style="color:var(--accent3);">更快·更省·更准</strong> → 模型成为锐锢的核心资产</p>
       </div>
     </div>
 
@@ -1466,7 +1453,7 @@ formulas/ → 月活+静默+工作率+升级率</div>
     <div class="divider"></div>
 
     <div class="sh"><h2 style="font-size:1.4rem;">信任建立路径</h2></div>
-    <div class="card-grid cols-3">
+    <div class="card-grid cols-4">
       <div class="card" style="text-align:center;">
         <div style="font-size:0.75rem;color:var(--accent);font-weight:700;margin-bottom:0.5rem;">第 1 个月</div>
         <div style="font-size:1.1rem;font-weight:700;color:var(--text-bright);margin-bottom:0.5rem;">"看看 AI 能做什么"</div>
@@ -1487,6 +1474,12 @@ formulas/ → 月活+静默+工作率+升级率</div>
         <div style="font-size:0.82rem;color:var(--text-dim);">全面自动化<br>仅红线保留人工<br>季度优化迭代</div>
         <div style="margin-top:0.75rem;font-size:1.5rem;font-weight:900;color:var(--accent4);">≥ 98%</div>
         <div style="font-size:0.75rem;color:var(--text-dim);">准确率目标</div>
+      </div>
+      <div class="card" style="text-align:center;border:1px solid rgba(239,68,68,0.3);background:linear-gradient(135deg,rgba(239,68,68,0.05),rgba(245,158,11,0.05));">
+        <div style="font-size:0.75rem;color:#ef4444;font-weight:700;margin-bottom:0.5rem;">第 4 个月起</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--text-bright);margin-bottom:0.5rem;">🧬 "AI 有了自己的大脑"</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);">Eval 积累 1,000+ 标注数据<br>LoRA 微调专属模型<br>更快 · 更省 · 更准</div>
+        <div style="margin-top:0.75rem;font-size:0.82rem;font-weight:700;color:#ef4444;">模型成为锐锢的核心资产</div>
       </div>
     </div>
   </div>
@@ -1554,6 +1547,33 @@ formulas/ → 月活+静默+工作率+升级率</div>
       <div class="cost-arrow">
         <div class="cost-pct" style="color:var(--accent4);">~10%</div>
         <div>第 10+ 个 — 几乎只需要配置</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sh"><h2 style="font-size:1.4rem;">🧬 LoRA 微调 — 越用越值钱的核心资产</h2></div>
+    <div class="card" style="max-width:700px;border:1px solid rgba(239,68,68,0.2);background:linear-gradient(135deg,rgba(239,68,68,0.04),rgba(245,158,11,0.04));">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-size:0.75rem;color:#ef4444;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;">数据飞轮</div>
+          <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;">
+            Agent 日常运行积累标注数据<br>
+            → Eval 验证持续产出 golden set<br>
+            → 达到 <strong style="color:var(--text-bright);">1,000+</strong> 数据点触发微调<br>
+            → 微调后模型推理成本 <strong style="color:var(--accent4);">↓ 50-70%</strong><br>
+            → 响应速度 <strong style="color:var(--accent4);">↑ 3-5x</strong>，准确率 <strong style="color:var(--accent4);">↑ 5-10%</strong>
+          </div>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-size:0.75rem;color:#ef4444;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;">长期价值</div>
+          <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;">
+            微调模型 = <strong style="color:var(--text-bright);">锐锢专属 AI 大脑</strong><br>
+            融合了业务规则 + 操作经验 + 判断逻辑<br>
+            这是用时间和数据换来的<br>
+            <strong style="color:var(--text-bright);">别人买不到、抄不走的核心资产</strong>
+          </div>
+        </div>
       </div>
     </div>
   </div>
